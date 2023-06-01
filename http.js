@@ -1,26 +1,89 @@
 var http = require("http");
+var fs = require("fs");
 http
   .createServer(function (req, res) {
-    res.writeHead(200, { "Content-Type": "text/html" });
     switch (req.url) {
       case "/about":
-        res.write("WHAT'S THIS ALL ABOUT?????");
-        break;
+        fs.readFile("views/about.html", (err, data) => {
+          if (err) {
+            res.writeHead(404, { "Content-Type": "text/plain" });
+            res.end("File not found");
+            return;
+          } else {
+            res.writeHead(200, { "Content-Type": "text/html" });
+            res.write(data);
+          }
+          res.end();
+        });
+        return;
       case "/contact":
-        res.write("Do not contact me");
-        break;
+        fs.readFile("views/contact.html", (err, data) => {
+          if (err) {
+            res.writeHead(404, { "Content-Type": "text/plain" });
+            res.end("File not found");
+            return;
+          } else {
+            res.writeHead(200, { "Content-Type": "text/html" });
+            res.write(data);
+          }
+          res.end();
+        });
+        return;
       case "/products":
-        res.write("Khajit has wares if you has coin");
-        break;
+        fs.readFile("views/product.html", (err, data) => {
+          if (err) {
+            res.writeHead(404, { "Content-Type": "text/plain" });
+            res.end("File not found");
+            return;
+          } else {
+            res.writeHead(200, { "Content-Type": "text/html" });
+            res.write(data);
+          }
+          res.end();
+        });
+        return;
       case "/subscribe":
-        res.write("snubsnirb");
-        break;
+        fs.readFile("views/sub.html", (err, data) => {
+          if (err) {
+            res.writeHead(404, { "Content-Type": "text/plain" });
+            res.end("File not found");
+            return;
+          } else {
+            res.writeHead(200, { "Content-Type": "text/html" });
+            res.write(data);
+          }
+          res.end();
+        });
+        return;
       case "/":
-        res.write("you sneaky you");
-        break;
+        fs.readFile("views/blank.html", (err, data) => {
+          if (err) {
+            res.writeHead(404, { "Content-Type": "text/plain" });
+            res.end("File not found");
+            return;
+          } else {
+            res.writeHead(200, { "Content-Type": "text/html" });
+            res.write(data);
+          }
+          res.end();
+        });
+        return;
       case "/woah":
-        res.write("Far out man");
-        break;
+        fs.readFile("views/woah.html", (err, data) => {
+          if (err) {
+            res.writeHead(404, { "Content-Type": "text/plain" });
+            res.end("File not found");
+            return;
+          } else {
+            res.writeHead(200, { "Content-Type": "text/html" });
+            res.write(data);
+          }
+          res.end();
+        });
+        return;
+      default:
+        res.writeHead(404, { "Content-Type": "text/plain" });
+        res.write("404 Not Found");
     }
     res.end();
   })
